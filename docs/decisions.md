@@ -107,7 +107,14 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   on the other harness, the fallback when a session reports that a
   limit ran out, and the cost of each step (#41). In M3, GLM and the
   other harnesses, and the limits left read in advance, so the cheap
-  steps go to GLM (#22, #23).
+  steps go to GLM (#22, #23). Empryo, a harness with many providers
+  and cheap or local models, is checked there too (#22).
+- A running session can send a message to another through Magos. The
+  message is data, not an instruction, and a limit stops a loop (#48,
+  Later).
+- An agent outside Magos, as a harness with plain craft on another
+  computer, can work through Magos's MCP tools. What it may read and
+  write is settled in the research of agents (#39).
 
 ### Above the workspaces
 
@@ -171,6 +178,15 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   reaction reaches the agent as feedback, and Magos keeps it (M4).
 - Voice goes both ways: dictation, and a talk mode with spoken replies
   (M4).
+- On every document, question and task, the person can read a summary,
+  listen to it, and talk about it by voice. For the documents that a
+  session writes, the changes between versions are told in words too
+  (#49, Later).
+- Artefacts are a strength of Magos, because development needs them:
+  mockups, images and sites, with versions and notes pinned to a
+  place. A research in M2 names the kinds and their order (#50).
+- A workspace's instructions name the language its agents write in.
+  This needs no code of its own (M4).
 
 ### The thread in M1
 
@@ -215,6 +231,10 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   and nobody starts another person's harness.
 - The terms of every provider are read again before the first release
   for other people (#32).
+- Later, beside the subscription: Claude Code on an API key that the
+  person gives from their secret store (#47), and the interactive
+  Claude Code in a terminal if `claude -p` stops working on a
+  subscription (#46).
 
 ### A commercial version
 
@@ -256,6 +276,9 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   agents from any phone (#28). This is looked at again when people
   from outside ask for such a client, or when a commercial version
   comes.
+- Later: the app icon and the drawings of the empty states, in the
+  style of the agent characters (#51); the person reorders the
+  workspaces and archives finished threads (#52).
 
 ## The architecture
 
