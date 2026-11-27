@@ -14,7 +14,8 @@ Apps for Windows, Linux and Android are not planned yet.
 
 Magos starts again here, from zero. The code comes into this
 repository piece by piece, from an earlier private prototype. Nothing
-runs yet.
+runs yet. Code from outside is not taken yet; ideas and bugs are
+welcome in issues.
 
 ## Licence
 

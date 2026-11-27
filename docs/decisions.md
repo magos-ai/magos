@@ -217,6 +217,17 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   still checks each call itself. This comes with the first add-on
   (#29).
 
+### People from outside
+
+- Magos is built in public to bring in people. Until something runs,
+  code from outside is not taken, and the README says so; ideas and
+  bugs are welcome in issues.
+- `CONTRIBUTING.md`, `SECURITY.md` and the rule for outside changes
+  come when the first person from outside comes, or before the first
+  release for other people (#44). The rule: what one person needs
+  belongs to the open core; a function for a team or a hosted cloud
+  is an add-on, and its code does not come into this repository.
+
 ### The interface
 
 - The apps are native. Nothing of the earlier Electron app is ported:
