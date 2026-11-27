@@ -6,10 +6,16 @@ options, one at a time.
 
 This file holds them until `docs/PRODUCT.md` with its PDRs (#2) and
 `docs/ARCHITECTURE.md` with its ADRs (#6) exist. Those issues move
-each decision into its record; then this file goes. Until then, a new
-decision is added here in the same way.
+each decision into its record, the rules of the tracker go into
+`CLAUDE.md` (#7), and then this file goes. Until then, a new decision
+is added here in the same way.
 
-Each entry says what was decided, and where the plan carries it.
+Each entry says what was decided. When an issue or a milestone carries
+it, the entry names it.
+
+"craft" in this file is a set of Agent Skills for the flow of
+development, from taking an issue to a merged pull request, that the
+owner runs in a terminal today.
 
 ## The product
 
@@ -19,19 +25,27 @@ Each entry says what was decided, and where the plan carries it.
   life: work, family and home, personal projects, career. Each area is
   a workspace with its own agents, connectors, memory and data.
   Nothing goes from one workspace into another.
-- Most agents do not write code. Development is one workspace among
-  others: a session may run with no repository, no worktree, no
+- Most agents do not write code. Development is one kind of work
+  among others: a session may run with no repository, no worktree, no
   commit and no pull request. Its work is data that it reads and
   writes through connectors, and the person sees it on dashboards, in
   chats and in notifications (#39).
 - A to-do app is not needed beside Magos: its dashboards, chats and
   notifications cover that work.
+- The value is in specialised agents and skills that work with the
+  person's own data, not in a general chat (#2).
+- Settings are a chat: a pinned summary first, then cards with live
+  controls, for agents, workspaces and connectors alike (#2).
+- A feature reaches every client at once, so no client waits for the
+  slowest one (#2, #20).
+- The Constructor is a separate helper that creates and edits agents
+  and workspaces through chat (#2, M6).
 - How Magos differs: simple on top, with a chat, connectors and an
   agent that writes its own skills; no lock to one vendor, with any
   harness and model on the person's own subscriptions; and a way to
   go deep, with the full log, Terminal and skills as files. The
-  closest products are named in `docs/PRODUCT.md` and checked again
-  when it is written (#2).
+  closest products are named in #2, and checked again when
+  `docs/PRODUCT.md` is written.
 - Before the first code, one real task runs in Hermes and is compared
   with the craft flow: M1 rests on the claim that no other product
   runs development this way (#45).
@@ -51,8 +65,9 @@ Each entry says what was decided, and where the plan carries it.
 
 M1 is done when the owner can run in Magos the same flow that the owner runs
 in a terminal today: from `#N` in a chat to a merged pull request,
-several sessions at once, nothing lost after a reboot. Five real tasks
-are measured against that flow (#17).
+three sessions at once, nothing lost after a reboot. Five real tasks
+pass the measurement against that flow (#17). The full list is the
+`Done when` of the milestone M1.
 
 Milestones have no due dates: their numbers give the order.
 Milestones M3 to M6 get their `Done when` when the one before closes.
@@ -62,8 +77,8 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
 - There are two kinds of extension only: Agent Skills with harness
   plugins, and MCP servers. Magos has no format of its own for them.
 - Magos runs no skill itself. It gives the skills and the MCP servers
-  of a workspace to each harness session that it starts, and it knows
-  no skill by name.
+  of a workspace, and of the project when the session has one, to each
+  harness session that it starts, and it knows no skill by name.
 - A skill or a plugin comes from a link. Magos shows what is inside,
   and after a yes pins it at the commit it was taken from. A newer
   version upstream comes in only after the person sees its diff and
@@ -92,12 +107,13 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   the next step on another harness when the limit of one runs out; a
   review on another harness than the one that wrote the code. For a
   goal such as "close all bugs" or a new feature, it writes a plan,
-  with the order and what runs where, and asks once before it runs the
-  plan.
+  with the order and what runs where, and Magos asks once before it
+  runs the plan.
 - The agent picks the harness and the model of each step as it writes
   the plan, and names a fallback for it. A Magos MCP tool tells it
   which harnesses and models there are, how much of each limit is
-  left, and what each costs. Magos runs the steps in their order. When
+  left, and what each costs. Magos runs the steps in their order, and
+  the steps of one task go on in the same branch and worktree. When
   the limit of a step's harness runs out, Magos takes the fallback
   from the plan; with no fallback, it asks the agent. Magos counts the
   cost of each step, and gives the counts to the agent for its next
@@ -120,16 +136,19 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
 
 - Only a router stands above the workspaces. It sees the message and
   the agents' descriptions, never a workspace's data, and hands the
-  message to the default agent of the workspace that fits. That agent
-  answers, or hands the task to another agent of its own workspace.
-  No agent sees across workspaces.
+  message to the default agent of the workspace that fits. When the
+  router is not sure which workspace fits, it asks the person. That
+  agent answers, or hands the task to another agent of its own
+  workspace. No agent sees across workspaces.
 - Home, and a morning brief across all areas, are built from short
   summaries that the agent of each workspace publishes for Home. Each
   workspace decides what it publishes.
 - The routing model is chosen by a comparison test of small models on
   labelled real messages: accuracy, latency and cost (M4).
-- Search over threads and memory is a dialogue with the main agent,
-  not a screen of its own (M4).
+- Search over threads and memory is a dialogue in the main chat, not
+  a screen of its own (M4). Open, for M4: how a search keeps the wall
+  between workspaces, and which text of a thread the core may keep for
+  it while the log stays on the Servo.
 
 ### Access
 
@@ -162,8 +181,9 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   nobody opened a routine's result three times in a row, the routine
   asks whether to turn it off (M2).
 - Magos sees GitHub by polling every 1 to 2 minutes with conditional
-  requests: a `304` costs no rate limit. No webhooks: a Mac has no
-  public address, and Magos requires no relay of a third party.
+  requests: a `304` to an authorized request costs no rate limit. No
+  webhooks: a Mac has no public address, and Magos requires no relay
+  of a third party.
 
 ### Dashboards and the chat
 
@@ -197,8 +217,9 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   it, because it can hold code and secrets; the core passes a page of
   it on request and keeps none (#9, #15).
 - A message can carry images, such as a pasted screenshot (#15).
-- A session can be copied by its id and opened in Terminal, as a way
-  out when Magos hangs or a session goes wrong (#14).
+- The id of a session can be copied, and the session opened in
+  Terminal in its worktree, as a way out when Magos hangs or a session
+  goes wrong (#14).
 - The checks and the review verdicts on the merge question come in M2.
 - One macOS notification for each question that waits, and a badge on
   the Dock icon. Other events and sounds come later (#16, #36). The
@@ -218,7 +239,10 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   data. The agent's plan and the router pick only from that list, and
   Magos starts no session with a provider outside it. The rule is
   written with the security model (#35); the list for Health is
-  chosen in M5.
+  chosen in M5. Until then, the workspaces hold development work, and
+  every provider may see it. Open, for #35: the router reads each
+  message before a workspace is known, so which provider its model
+  may use.
 - An agent acts on a website on the person's behalf through a browser
   on a Servo. The sign-in comes through a password manager's channel
   for agents, so the model never sees the password, and Magos asks
@@ -229,8 +253,8 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
 - Each Servo starts the unmodified harness CLI under the login of the
   person who owns that computer. Magos never holds a harness login,
   and nobody starts another person's harness.
-- The terms of every provider are read again before the first release
-  for other people (#32).
+- The terms of every provider are read again, and shown to a lawyer,
+  before the first release for other people (#32).
 - Later, beside the subscription: Claude Code on an API key that the
   person gives from their secret store (#47), and the interactive
   Claude Code in a terminal if `claude -p` stops working on a
@@ -253,9 +277,9 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
 
 ### People from outside
 
-- Magos is built in public to bring in people. Until something runs,
-  code from outside is not taken, and the README says so; ideas and
-  bugs are welcome in issues.
+- Magos is built in public to bring in people. Until the rules of #44
+  are written, code from outside is not taken, and the README says so;
+  ideas and bugs are welcome in issues.
 - `CONTRIBUTING.md`, `SECURITY.md` and the rule for outside changes
   come when the first person from outside comes, or before the first
   release for other people (#44). The rule: what one person needs
@@ -271,7 +295,7 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   as references outside this repository.
 - The apps are for Apple devices: the Mac, then the iPhone and the
   iPad (#26). Linux runs only the core and the Servo, with no screen
-  (#25). Apps for Windows, for Linux on a desktop and for Android are
+  (#21, #25). Apps for Windows, for Linux on a desktop and for Android are
   not planned: they wait in Later (#42), and a messenger reaches the
   agents from any phone (#28). This is looked at again when people
   from outside ask for such a client, or when a commercial version
