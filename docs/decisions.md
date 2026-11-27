@@ -375,34 +375,35 @@ result (#6).
 
 ## The repository
 
-Decided on 2026-11-27, for the scaffold (#7). ADR 0002 records it in
-the pull request of #7.
+ADR 0002 records these in the pull request of the scaffold (#7).
 
-- One repository holds the open core: the Go program `magos`, the app
-  for the Mac, the app for the iPhone and the iPad (#26), and the
-  schema of the control protocol (#9). A task that changes the core
-  and the apps is one pull request.
+- One repository holds the open core: the Go program `magos`, with
+  the core and the Servo; the app for the Mac; the app for the iPhone
+  and the iPad (#26); and the schema of the control protocol (#9). So
+  one task can change the Go program and the apps in one pull request.
 - `apps/` holds what is built and installed: `apps/magos` in Go,
   `apps/mac` in SwiftUI, and later `apps/ios`. `packages/` holds code
-  that two apps or more use, as the schema of the protocol and the
-  Swift code that the Mac app and the iPhone app share. `packages/`
-  comes with its first package.
-- Each app keeps the files of its own toolchain: `apps/magos` has its
-  own `go.mod`, with the module `github.com/magos-ai/magos/apps/magos`,
-  and `apps/mac` has its own `Package.swift`. So a tag of the product,
-  as `v2.0.0`, sets no version of the Go module, and the module path
-  needs no `/v2`. `go install` of a version needs tags such as
-  `apps/magos/v0.3.0`. They come when people install `magos` that way.
-- No tool for a monorepo, as Bun workspaces, Turborepo or Nx. They
-  link JavaScript packages, and the repository has none. Go and SwiftPM
-  keep their own workspaces and build caches, and one `Makefile` at the
-  root runs the check of each app. This is looked at again when a part
-  in JavaScript or TypeScript comes.
-- A part goes into a repository of its own only when its code is
-  closed, when it has its own users and releases without Magos, or
-  when a tool requires a repository of its own. Today these are the
-  team and cloud add-ons (#29), craft, and a person's own prompts,
-  skills and data.
+  that two directories of `apps/` or more use, as the schema of the
+  protocol and the Swift code that the Mac app and the iPhone app
+  share. `packages/` comes with its first package.
+- Each directory in `apps/` keeps the files of its own toolchain:
+  `apps/magos` has its own `go.mod`, with the module
+  `github.com/magos-ai/magos/apps/magos`, and `apps/mac` has its own
+  `Package.swift`. So a tag of the product, as `v2.0.0`, sets no
+  version of the Go module, and the module path needs no `/v2`.
+  `go install` of a version needs tags such as `apps/magos/v0.3.0`.
+  They come when people install `magos` that way.
+- No tool for a monorepo, as Bun, Turborepo or Nx. The repository
+  holds no JavaScript, and for Go and Swift such a tool can only run
+  the checks and keep their results. Go and SwiftPM keep their own
+  build caches, and one `Makefile` at the root runs the check of each
+  directory in `apps/`. This is looked at again when a part in
+  JavaScript or TypeScript comes.
+- A part stays out of this repository only when it is closed or
+  private, when it has its own users and releases without Magos, or
+  when a tool requires a repository of its own. So the team and cloud
+  add-ons (#29), craft, and a person's own prompts, skills and data
+  stay out.
 
 ## The tracker
 
