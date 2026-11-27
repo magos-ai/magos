@@ -75,8 +75,14 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   (#39).
 - A person's own agents are connectors plus data. Only the connectors
   can be public; the prompts, the skills and the data stay private.
-- The Development workspace has no model loop of its own in the core:
-  harness sessions with the workspace's skills do the work.
+- Magos plans development work into steps, and spreads the steps over
+  the harnesses and models that it is given: a cheap model for a
+  simple step, as a component or a test; the next step on another
+  harness when the limit of one runs out; a review on another harness
+  than the one that wrote the code. For a goal such as "close all
+  bugs", it writes a plan, with the order and what runs where, and
+  asks once before it runs the plan. How Magos plans, and in which
+  milestone, is decided next.
 
 ### Above the workspaces
 
