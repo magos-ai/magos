@@ -198,6 +198,11 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   data and outside effects in one session; limits on reads, not only
   writes; a log of every tool call; a stop that ends the process
   (#35).
+- Each workspace keeps a list of the model providers that may see its
+  data. The agent's plan and the router pick only from that list, and
+  Magos starts no session with a provider outside it. The rule is
+  written with the security model (#35); the list for Health is
+  chosen in M5.
 - An agent acts on a website on the person's behalf through a browser
   on a Servo. The sign-in comes through a password manager's channel
   for agents, so the model never sees the password, and Magos asks
