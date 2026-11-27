@@ -26,6 +26,12 @@ Each entry says what was decided, and where the plan carries it.
   chats and in notifications (#39).
 - A to-do app is not needed beside Magos: its dashboards, chats and
   notifications cover that work.
+- How Magos differs: simple on top, with a chat, connectors and an
+  agent that writes its own skills; no lock to one vendor, with any
+  harness and model on the person's own subscriptions; and a way to
+  go deep, with the full log, Terminal and skills as files. The
+  closest products are named in `docs/PRODUCT.md` and checked again
+  when it is written (#2).
 
 ### The order of the work
 
