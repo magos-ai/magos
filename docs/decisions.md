@@ -32,6 +32,9 @@ Each entry says what was decided, and where the plan carries it.
   go deep, with the full log, Terminal and skills as files. The
   closest products are named in `docs/PRODUCT.md` and checked again
   when it is written (#2).
+- Before the first code, one real task runs in Hermes and is compared
+  with the craft flow: M1 rests on the claim that no other product
+  runs development this way (#45).
 
 ### The order of the work
 
