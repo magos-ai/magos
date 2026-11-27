@@ -84,8 +84,15 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   review on another harness than the one that wrote the code. For a
   goal such as "close all bugs" or a new feature, it writes a plan,
   with the order and what runs where, and asks once before it runs the
-  plan. Who picks the harness of each step, and in which milestone,
-  is decided next.
+  plan.
+- The agent picks the harness and the model of each step as it writes
+  the plan, and names a fallback for it. A Magos MCP tool tells it
+  which harnesses and models there are, how much of each limit is
+  left, and what each costs. Magos runs the steps in their order. When
+  the limit of a step's harness runs out, Magos takes the fallback
+  from the plan; with no fallback, it asks the agent. Magos counts the
+  cost of each step, and gives the counts to the agent for its next
+  plan. In which milestone this comes is decided next.
 
 ### Above the workspaces
 
