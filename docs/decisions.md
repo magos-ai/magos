@@ -211,6 +211,11 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   workspace offers a task, and the person's Servo takes it.
 - The repository is the open core under Apache-2.0, as the README
   says. Functions for a team and a hosted cloud are separate add-ons.
+- When the app connects, the core names its installed modules, and
+  the app shows only those parts: a core with no team add-on shows no
+  team chat. The app skips a name that it does not know. The core
+  still checks each call itself. This comes with the first add-on
+  (#29).
 
 ### The interface
 
