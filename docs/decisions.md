@@ -75,14 +75,17 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   (#39).
 - A person's own agents are connectors plus data. Only the connectors
   can be public; the prompts, the skills and the data stay private.
-- Magos plans development work into steps, and spreads the steps over
-  the harnesses and models that it is given: a cheap model for a
-  simple step, as a component or a test; the next step on another
-  harness when the limit of one runs out; a review on another harness
-  than the one that wrote the code. For a goal such as "close all
-  bugs", it writes a plan, with the order and what runs where, and
-  asks once before it runs the plan. How Magos plans, and in which
-  milestone, is decided next.
+- Development is the work of an agent: the development agent of a
+  workspace, or the agent of one project. The agent plans; harnesses
+  are its hands, and each step of the plan runs in a harness session.
+  The agent spreads the steps over the harnesses and models that it is
+  given: a cheap model for a simple step, as a component or a test;
+  the next step on another harness when the limit of one runs out; a
+  review on another harness than the one that wrote the code. For a
+  goal such as "close all bugs" or a new feature, it writes a plan,
+  with the order and what runs where, and asks once before it runs the
+  plan. Who picks the harness of each step, and in which milestone,
+  is decided next.
 
 ### Above the workspaces
 
