@@ -219,6 +219,13 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
 - The rules and the skills for the native interface are chosen when
   the UI work starts. The earlier prototypes of the interface are kept
   as references outside this repository.
+- The apps are for Apple devices: the Mac, then the iPhone and the
+  iPad (#26). Linux runs only the core and the Servo, with no screen
+  (#25). Apps for Windows, for Linux on a desktop and for Android are
+  not planned: they wait in Later (#42), and a messenger reaches the
+  agents from any phone (#28). This is looked at again when people
+  from outside ask for such a client, or when a commercial version
+  comes.
 
 ## The architecture
 

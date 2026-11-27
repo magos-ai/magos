@@ -8,6 +8,7 @@ Nothing goes from one workspace into another.
 You talk to Magos in a chat or by voice, in native apps for Mac and
 iPhone. One of its agents, Development, takes a task from a GitHub
 issue to a pull request, with the coding agents on your own computers.
+Apps for Windows, Linux and Android are not planned yet.
 
 ## Status
 
