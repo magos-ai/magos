@@ -140,6 +140,16 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   router is not sure which workspace fits, it asks the person. That
   agent answers, or hands the task to another agent of its own
   workspace. No agent sees across workspaces.
+- The router is the main agent of the main chat. It reads no data of a
+  workspace itself, and it acts only through the agents of the
+  workspaces. A link to a film goes to the agent of the personal
+  workspace, which adds it to the list; a question about a work project
+  goes to the agent of the work workspace; the answer shows in the main
+  chat. A question about everything at once is answered from the
+  summaries that the workspaces publish for Home. Why: a link from the
+  web is untrusted input, and one agent that holds the data of every
+  workspace and can act would join all three things that the security
+  model keeps apart (#35).
 - Home, and a morning brief across all areas, are built from short
   summaries that the agent of each workspace publishes for Home. Each
   workspace decides what it publishes.
