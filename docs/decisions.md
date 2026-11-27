@@ -140,15 +140,29 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   router is not sure which workspace fits, it asks the person. That
   agent answers, or hands the task to another agent of its own
   workspace. No agent sees across workspaces.
+- The router is the main agent of the main chat. It reads no data of a
+  workspace itself, and it acts only through the agents of the
+  workspaces. A link to a film goes to the agent of the personal
+  workspace, which adds it to the list; a question about a work project
+  goes to the agent of the work workspace; the answer shows in the main
+  chat. A question about everything at once is answered from the
+  summaries that the workspaces publish for Home. Why: a link from the
+  web is untrusted input, and one agent that holds the data of every
+  workspace and can act would join all three things that the security
+  model keeps apart (#35).
 - Home, and a morning brief across all areas, are built from short
   summaries that the agent of each workspace publishes for Home. Each
   workspace decides what it publishes.
 - The routing model is chosen by a comparison test of small models on
   labelled real messages: accuracy, latency and cost (M4).
-- Search over threads and memory is a dialogue in the main chat, not
-  a screen of its own (M4). Open, for M4: how a search keeps the wall
-  between workspaces, and which text of a thread the core may keep for
-  it while the log stays on the Servo.
+- Search over threads and memory is an activity above the workspaces,
+  beside the main agent and Home: a dialogue in the main chat, not a
+  screen of its own. The main agent turns the person's words into a
+  query; the core searches the threads of every workspace with the
+  full-text search of SQLite, and shows the threads it found to the
+  person as cards, by workspace. No model reads the text of another
+  workspace: a question about a found thread goes to the agent of its
+  workspace (M4).
 
 ### Access
 
@@ -212,10 +226,13 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
 
 - A question from a session shows as a card with its options, the
   Recommended mark and a free-text answer (#4, #15).
-- The thread shows the session's full log, read-only: each tool call
-  on one line, its output folded. The log stays on the Servo that ran
-  it, because it can hold code and secrets; the core passes a page of
-  it on request and keeps none (#9, #15).
+- The core keeps the full text of each thread: the messages, each
+  tool call and its output. The thread shows it read-only: each tool
+  call on one line, its output folded (#9, #15).
+- The harness's own log of the session can be opened from the thread
+  too. The core copies it when it may; when it may not, the app loads
+  it from the Servo that ran the session and shows it from there (#9,
+  #15).
 - A message can carry images, such as a pasted screenshot (#15).
 - The id of a session can be copied, and the session opened in
   Terminal in its worktree, as a way out when Magos hangs or a session
