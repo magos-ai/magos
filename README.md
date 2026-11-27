@@ -8,12 +8,14 @@ Nothing goes from one workspace into another.
 You talk to Magos in a chat or by voice, in native apps for Mac and
 iPhone. One of its agents, Development, takes a task from a GitHub
 issue to a pull request, with the coding agents on your own computers.
+Apps for Windows, Linux and Android are not planned yet.
 
 ## Status
 
-Magos starts again here, from zero. The code comes into this
-repository piece by piece, from an earlier private prototype. Nothing
-runs yet.
+Magos starts again here, from zero. The code is written here anew,
+piece by piece; an earlier private prototype is its reference. Nothing
+runs yet. Code from outside is not taken yet; ideas and bugs are
+welcome in issues.
 
 ## Licence
 
