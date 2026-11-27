@@ -92,7 +92,13 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
   the limit of a step's harness runs out, Magos takes the fallback
   from the plan; with no fallback, it asks the agent. Magos counts the
   cost of each step, and gives the counts to the agent for its next
-  plan. In which milestone this comes is decided next.
+  plan.
+- The plan comes in two milestones. In M2, the plan, its one "Run?"
+  and the run of its steps on Claude Code and Codex, with the review
+  on the other harness, the fallback when a session reports that a
+  limit ran out, and the cost of each step (#41). In M3, GLM and the
+  other harnesses, and the limits left read in advance, so the cheap
+  steps go to GLM (#22, #23).
 
 ### Above the workspaces
 
