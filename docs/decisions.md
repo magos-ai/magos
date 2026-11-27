@@ -79,6 +79,13 @@ Milestones M3 to M6 get their `Done when` when the one before closes.
 - Magos runs no skill itself. It gives the skills and the MCP servers
   of a workspace, and of the project when the session has one, to each
   harness session that it starts, and it knows no skill by name.
+- Codex cannot get a plugin for one session: a plugin works only when
+  it is installed in `CODEX_HOME`, and its hooks run only when they are
+  trusted (#5). So in M1, the person installs craft in Codex and
+  trusts its hooks once, as craft's README says. Before a Codex session
+  starts, Magos checks the hooks with `hooks/list`, and stops with a
+  message when one of them is not trusted. Every Codex session on that
+  computer gets craft (#11).
 - A skill or a plugin comes from a link. Magos shows what is inside,
   and after a yes pins it at the commit it was taken from. A newer
   version upstream comes in only after the person sees its diff and
