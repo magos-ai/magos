@@ -1,0 +1,44 @@
+name: check
+
+# No paths filter: the required check of a workflow that does not run stays
+# pending, and the pull request cannot merge. The run on main shows a break
+# that two pull requests make together, each green alone.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  make-check:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-latest, xcode-27]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: apps/magos/go.mod
+          cache-dependency-path: apps/magos/go.mod
+      # The runner images change each week: the log shows which Swift ran.
+      - name: Show the Swift toolchain
+        if: runner.os == 'macOS'
+        run: swift --version
+      - run: make check
+
+  # The required check of the main ruleset. A job that is skipped after a
+  # failed job in its needs reports success, also as a required check. So
+  # this job runs always, and fails unless each run of make-check succeeded.
+  check:
+    if: always()
+    needs: make-check
+    runs-on: ubuntu-latest
+    steps:
+      - if: needs.make-check.result != 'success'
+        run: |
+          echo "make-check: ${{ needs.make-check.result }}"
+          exit 1
