@@ -20,7 +20,7 @@ Voice goes both ways: dictation, and a talk mode with spoken replies
 
 ## Revisit when
 
-#49 is planned into a milestone.
+#49 moves from Later into one of the milestones M1 to M6.
 
 ## Links
 

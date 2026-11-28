@@ -1,4 +1,4 @@
-# 0008 Only a router stands above the workspaces
+# 0008 Only the router, Home and search stand above the workspaces
 
 - Status: accepted
 - Level: project
@@ -6,12 +6,12 @@
 
 ## Decision
 
-- Only a router stands above the workspaces. It sees the message and
-  the agents' descriptions, never a workspace's data, and hands the
-  message to the default agent of the workspace that fits. When the
-  router is not sure which workspace fits, it asks the person. That
-  agent answers, or hands the task to another agent of its own
-  workspace.
+- Only one agent stands above the workspaces: the router. It sees the
+  message and the agents' descriptions, never a workspace's data, and
+  hands the message to the default agent of the workspace that fits.
+  The default agent answers, or hands the task to another agent of its
+  own workspace. When the router is not sure which workspace fits, it
+  asks the person.
 - The router is the main agent of the main chat. It reads no data of a
   workspace itself, and it acts only through the agents of the
   workspaces. A link to a film goes to the agent of the personal

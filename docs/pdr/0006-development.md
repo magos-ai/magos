@@ -37,7 +37,7 @@
 
 - No other product runs development with an agent that chooses the
   harness, the model and the review of each step: a market research of
-  about 425 products on 2026-11-16, and a real task run in Hermes
+  about 425 products on 2026-11-16 (#2), and a real task run in Hermes
   (#45). See *Checked*.
 
 ## Revisit when
@@ -62,12 +62,18 @@ PDR 0002, PDR 0004, #22, #23, #41, #45, #56
   took no part in the run. The check was one task; a repository
   without craft would show Hermes's own flow. The claim stands, and M1
   stays as planned (#56).
-- 2026-11-28 #2: the closest products were checked again. Paseo Hub
-  comes nearest: its orchestrating agent picks the provider and the
-  model of each worker, guided by notes that the person writes
-  (https://paseo.sh/docs/agent-profiles.md). Its docs name no fallback
-  when a limit runs out, no rule to review on another provider, and no
-  cost of each worker. A public set of Claude Code rules
+- 2026-11-28 #2: the closest products were checked again. Two come
+  nearest, and each does a part. In Paseo Hub, an orchestrating agent
+  picks the provider and the model of each worker, guided by notes
+  that the person writes (https://paseo.sh/docs/agent-profiles.md).
+  Its docs name no fallback when a limit runs out, no rule to review
+  on another provider, and no cost of each worker. In bb, when the
+  person asks, an orchestrating agent starts threads and picks the
+  provider of each, and by default a review runs on another agent than
+  the builder
+  (https://getbb.app/guides/orchestrate-coding-agents). Its docs name
+  no choice of the model, no fallback when a limit runs out, and no
+  cost of each thread. A public set of Claude Code rules
   (https://github.com/rwspatin/agent-orchestration) maps kinds of task
   to a harness and a model and reviews across vendors, as rules that
   one session follows, with no fallback. No product found does all

@@ -16,7 +16,9 @@
   Magos starts no session with a provider outside it. The rule is
   written with the security model (#35); the list for Health is chosen
   in M5. Until then, the workspaces hold development work, and every
-  provider may see it.
+  provider may see it. The router reads each message before its
+  workspace is known, so which provider its model may use is open:
+  Q-2 in `PRODUCT.md`.
 - An agent acts on a website on the person's behalf through a browser
   on a Servo. The sign-in comes through a password manager's channel
   for agents, so the model never sees the password, and Magos asks

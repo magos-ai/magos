@@ -17,7 +17,9 @@ core; a function for a team or a hosted cloud is an add-on.
 
 ## Rests on
 
-- The owner's choice, recorded in the README and in the planning (#40).
+- The owner's choice, recorded in the README, in the planning (#40)
+  and in #29: "The open core stays free for one person. A team and the
+  cloud come as closed add-ons to one server."
 - Assumption: a team pays for the work that people share, which one
   person does not need (PDR 0016).
 

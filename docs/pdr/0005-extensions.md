@@ -19,9 +19,10 @@
 - Magos's own contract is its versioned MCP tools: sessions, Servos, a
   question to the person, a dashboard card, a proposed task.
 - In M1, on Codex: craft, a set of Agent Skills for the flow of
-  development, reaches a session as the person's own install. The
-  person installs craft in Codex and trusts its hooks, and trusts them
-  again after each release of craft, as craft's README says. Before a
+  development, reaches a session as the person's own install. In M1,
+  where every workspace holds development work, the person installs
+  craft in Codex and trusts its hooks, and trusts them again after
+  each release of craft, as craft's README says. Before a
   Codex session starts, Magos checks with `hooks/list` that each
   enabled hook of the session is trusted, and stops with a message
   when one is not. Every Codex session on that computer gets craft,
@@ -29,7 +30,8 @@
 
 ## Rests on
 
-- The owner's choice on 2026-11-26 (#40).
+- The owner's choice on 2026-11-26 (#40), and for Codex in M1 on
+  2026-11-27 (#11, #54).
 - Codex loads a plugin only when it is installed in `CODEX_HOME`. Its
   hooks run only when they are trusted, or when a thread skips the
   trust check, which skips it for every other hook of the person too
@@ -42,4 +44,4 @@ drives takes neither Agent Skills nor MCP servers.
 
 ## Links
 
-PDR 0004, #5, #11, #38
+PDR 0004, #5, #11, #38, #54

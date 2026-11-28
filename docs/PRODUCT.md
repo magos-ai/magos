@@ -2,7 +2,8 @@
 
 The product's direction, its constraints, its open questions and the
 index of its decisions. Each decision is a PDR in [`pdr/`](pdr/). The
-decisions of the code go into `ARCHITECTURE.md` and its ADRs (#6).
+decisions of the code are in [`decisions.md`](decisions.md) until
+`ARCHITECTURE.md` and its ADRs exist (#6).
 
 ## What Magos is, and for whom
 
@@ -52,13 +53,17 @@ The closest products, checked again on 2026-11-28:
   - [Multica](https://github.com/multica-ai/multica): a board where
     the person gives issues to coding agents on their own computers.
     The person picks the agent of each issue.
-  - [bb](https://getbb.app/): a local-first IDE for coding agents. The
-    person picks the provider of each thread.
+  - [bb](https://getbb.app/): a local-first IDE for coding agents. It
+    comes nearest, with Paseo Hub: when the person asks, its
+    orchestrating agent starts threads and picks the provider of each,
+    and by default a review runs on another agent than the builder.
+    Its docs name no choice of the model, no fallback when a limit
+    runs out, and no cost of each thread.
   - [Paseo Hub](https://paseo.sh): starts agents on the person's
-    computers from GitHub, Linear, Slack and schedules. It comes
-    nearest: its orchestrating agent picks the provider and the model
-    of each worker, guided by the person's notes. Its docs name no
-    fallback when a limit runs out, no review on another provider, and
+    computers from GitHub, Linear, Slack and schedules. Its
+    orchestrating agent picks the provider and the model of each
+    worker, guided by the person's notes. Its docs name no fallback
+    when a limit runs out, no rule to review on another provider, and
     no cost of each worker.
   - [Orca](https://github.com/stablyai/orca): runs CLI agents in
     parallel worktrees on the person's own subscriptions; a
@@ -67,20 +72,21 @@ The closest products, checked again on 2026-11-28:
   - [OpenClaw](https://github.com/openclaw/openclaw): an assistant on
     the person's own devices, through chat channels and native apps.
   - [Hermes](https://github.com/NousResearch/hermes-agent): an
-    open-source agent by Nous Research, with bots and messages between
-    agents (#45).
+    open-source personal agent by Nous Research, reached through
+    messengers. A real task ran in it in #45.
   - [Grok Bot](https://x.ai/blog/introducing-grok-bot): a closed agent
     in the cloud of xAI, on xAI models only, that works in apps and
     sites.
 
 ## What Magos will not do
 
-- Be a general chat, or a to-do app beside its agents: dashboards,
-  chats and notifications cover that work.
-- Have a format of its own for extensions, or run a skill itself (PDR
-  0005).
+- Be a to-do app beside its agents: dashboards, chats and
+  notifications cover that work.
+- Have a format of its own for extensions (PDR 0005), or run a skill
+  itself (PDR 0004).
 - Hold a harness login, or start another person's harness (PDR 0004).
-- Let an agent see across workspaces (PDR 0003, PDR 0008).
+- Let an agent see across workspaces (PDR 0003, PDR 0008). In M1 the
+  wall is in Magos's data only, and the app says so (PDR 0003).
 - Require a relay of a third party (PDR 0010).
 - Ship apps for Windows, for Linux on a desktop or for Android, for
   now (PDR 0015, #42).
@@ -107,8 +113,10 @@ The closest products, checked again on 2026-11-28:
 
 ### The money
 
-- Sessions run on the person's own subscriptions. Magos pays for no
-  model.
+- On the person's own computers, sessions run on the person's own
+  subscriptions, and later on their own API key too (PDR 0004, #47).
+- On servers of a hosted cloud, agents run on API keys or on the
+  person's own Servo. Magos keeps no subscription login there (#29).
 - The open core is free for one person. Functions for a team and for a
   hosted cloud are closed add-ons (PDR 0001); their prices are open
   (Q-6).
@@ -124,7 +132,7 @@ The closest products, checked again on 2026-11-28:
 ### Q-2 Which model provider may the router use, as it reads a message before its workspace is known?
 
 - Answers: person, after the research of #35
-- Blocks: #35, PDR 0008
+- Blocks: #35, PDR 0008, PDR 0020
 - Since: 2026-11-27
 
 ### Q-3 Are agents from outside needed at all?
@@ -159,24 +167,25 @@ The closest products, checked again on 2026-11-28:
 
 ## Decisions
 
-- [0001 Apache-2.0 open core, with team and cloud as closed add-ons](pdr/0001-licence.md) — accepted; revisit when: the first add-on needs a part that one person needs too (#29)
-- [0002 The order of the milestones, M1 to M6, then Later](pdr/0002-milestones.md) — accepted; revisit when: a milestone closes
-- [0003 A workspace for each area of life, and nothing crosses between them](pdr/0003-workspaces.md) — accepted; revisit when: a task needs the data of two workspaces at once
-- [0004 Magos drives unmodified harnesses on the person's own logins](pdr/0004-harnesses.md) — accepted; revisit when: a provider's terms forbid it (#32)
-- [0005 Standard extensions only, added at runtime](pdr/0005-extensions.md) — accepted; revisit when: Codex loads a plugin for one session (#5)
+- [0001 Apache-2.0 open core, with team and cloud as closed add-ons](pdr/0001-licence.md) — accepted; revisit when: the first add-on needs a part that one person needs too (#29), or a person from outside offers code for a team (#44)
+- [0002 The order of the milestones, M1 to M6, then Later](pdr/0002-milestones.md) — accepted; revisit when: a milestone closes, or a check of PDR 0006 shows a product that does all that it names
+- [0003 A workspace for each area of life, and nothing crosses between them](pdr/0003-workspaces.md) — accepted; revisit when: a task needs the data of two workspaces at once, and the summaries for Home do not cover it
+- [0004 Magos drives unmodified harnesses on the person's own logins](pdr/0004-harnesses.md) — accepted; revisit when: a provider's terms forbid it (#32), or `claude -p` stops working on a subscription (#46)
+- [0005 Standard extensions only, added at runtime](pdr/0005-extensions.md) — accepted; revisit when: Codex loads a plugin for one session (#5), or a harness takes neither Agent Skills nor MCP servers
 - [0006 The development agent plans the steps, and Magos runs them](pdr/0006-development.md) — accepted; revisit when: another product does all of it
 - [0007 An agent is a prompt, skills and tools inside one workspace](pdr/0007-agents.md) — accepted; revisit when: #39 recommends
-- [0008 Only a router stands above the workspaces](pdr/0008-above-workspaces.md) — accepted; revisit when: #35 is settled
+- [0008 Only the router, Home and search stand above the workspaces](pdr/0008-above-workspaces.md) — accepted; revisit when: #35 is settled, or the test of routing models runs (M4)
 - [0009 Access is granted per resource](pdr/0009-access.md) — accepted; revisit when: a service cannot grant one resource only
-- [0010 A routine proposes, and a tap applies](pdr/0010-routines.md) — accepted; revisit when: most kinds of action run by themselves
+- [0010 A routine proposes, and a tap applies](pdr/0010-routines.md) — accepted; revisit when: most kinds of action run by themselves, or a core with a public address comes (M3)
 - [0011 The workspace's agent assembles its dashboard from primitives](pdr/0011-dashboards.md) — accepted; revisit when: #20 chooses the view language
-- [0012 Read, listen and talk on every document, question and task](pdr/0012-voice.md) — accepted; revisit when: #49 is planned
+- [0012 Read, listen and talk on every document, question and task](pdr/0012-voice.md) — accepted; revisit when: #49 moves from Later into M1 to M6
 - [0013 Settings are a chat](pdr/0013-settings.md) — accepted; revisit when: the first place of settings is drawn (#37)
 - [0014 A feature reaches every client at once](pdr/0014-client-releases.md) — accepted; revisit when: a client cannot draw the view language (#20)
-- [0015 Native apps for Apple devices only](pdr/0015-clients.md) — accepted; revisit when: people from outside ask for another platform
+- [0015 Native apps for Apple devices only](pdr/0015-clients.md) — accepted; revisit when: people from outside ask for another platform, or a commercial version comes
 - [0016 Shared workspaces lead the commercial version](pdr/0016-commercial-version.md) — accepted; revisit when: the add-ons are planned (#29)
 - [0017 The Constructor creates agents and workspaces through chat](pdr/0017-constructor.md) — accepted; revisit when: M6 gets its `Done when`
 - [0018 What the thread shows in M1](pdr/0018-thread.md) — accepted; revisit when: the UI of the thread is designed
 - [0019 Memory at three levels](pdr/0019-memory.md) — accepted; revisit when: #34 recommends
-- [0020 Personal data comes in only after its rules](pdr/0020-personal-data.md) — accepted; revisit when: #35 is settled
-- [0021 Built in public, with no code from outside yet](pdr/0021-outside-contributions.md) — accepted; revisit when: the first person from outside offers code (#44)
+- [0020 Personal data comes in only after its rules](pdr/0020-personal-data.md) — accepted; revisit when: #35 is settled, or M5 starts
+- [0021 Built in public, with no code from outside yet](pdr/0021-outside-contributions.md) — accepted; revisit when: the first person from outside offers code, or the first release for other people is planned (#44)
+- [0022 One download, with no setup at the first start](pdr/0022-install.md) — accepted; revisit when: the app goes to other people (#33)

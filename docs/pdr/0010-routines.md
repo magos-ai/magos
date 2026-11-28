@@ -28,8 +28,8 @@
 ## Rests on
 
 - The owner's choice on 2026-11-26 (#40).
-- A `304` to an authorized conditional request costs no rate limit of
-  GitHub
+- A `304` to an authorized conditional request does not count against
+  the primary rate limit of GitHub
   (https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api).
 - A Mac has no public address, and Magos requires no relay of a third
   party.

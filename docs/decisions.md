@@ -50,10 +50,6 @@ result (#6).
 - M1 is signed with a free Apple Development certificate and built
   from source. Developer ID and notarization come when the app goes to
   other people (#33).
-- After the signature, Magos ships as one download: one DMG with the
-  app and its helper, updates that reach the app by themselves, and a
-  first start with no setup, which starts the core, finds the
-  harnesses and offers the first workspace (#43).
 - The tests of the harness adapters run on sessions recorded on this
   repository with short neutral tasks. A script replaces the home path
   and the account ids before the commit, and the harness version is in
