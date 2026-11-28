@@ -13,9 +13,10 @@ Apps for Windows, Linux and Android are not planned yet.
 ## Status
 
 Magos starts again here, from zero. The code is written here anew,
-piece by piece; an earlier private prototype is its reference. Nothing
-runs yet. Code from outside is not taken yet; ideas and bugs are
-welcome in issues.
+piece by piece; an earlier private prototype is its reference. So far
+there is only the frame: the Go program `magos` starts and stops as
+the core and as the Servo, and the Mac app opens one window. Code from
+outside is not taken yet; ideas and bugs are welcome in issues.
 
 ## Licence
 
