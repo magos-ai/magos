@@ -69,12 +69,12 @@ func TestRoleRunsUntilSignal(t *testing.T) {
 			case <-time.After(5 * time.Second):
 				t.Fatalf("magos %s still runs 5 s after %v", tc.command, tc.sig)
 			}
-			// The child has exited, so the read ends at once: the deadline
-			// of the first line must not cut it.
-			r.SetReadDeadline(time.Time{})
+			// The deadline of the first line must not cut this read. A new
+			// one still ends it when another process holds the pipe open.
+			r.SetReadDeadline(time.Now().Add(5 * time.Second))
 			rest, err := io.ReadAll(out)
-			if err != nil || !strings.HasSuffix(string(rest), tc.role+" stopped.\n") {
-				t.Errorf("output after the first line %q (%v), want it to end with %q", rest, err, tc.role+" stopped.\n")
+			if want := "Stop it with Ctrl-C.\n" + tc.role + " stopped.\n"; err != nil || string(rest) != want {
+				t.Errorf("output after the first line %q (%v), want %q", rest, err, want)
 			}
 		})
 	}
@@ -83,15 +83,20 @@ func TestRoleRunsUntilSignal(t *testing.T) {
 // A call that runs no role exits at once. With no command, magos prints the
 // usage. Any other wrong call says what is wrong, and then the next step.
 func TestCallsWithoutARole(t *testing.T) {
+	const wantUsage = "Usage: magos <command>\n\nCommands:\n" +
+		"  serve  Run the core.\n  servo  Run the Servo.\n  help   Show this help.\n"
 	for _, tc := range []struct {
 		args           []string
 		want           int
 		stdout, stderr string
 	}{
-		{nil, 2, "", usage},
+		{nil, 2, "", wantUsage},
 		{[]string{"nope"}, 2, "", "Unknown command \"nope\".\nRun \"magos help\" for the commands.\n"},
+		{[]string{"nope", "extra"}, 2, "", "Unknown command \"nope\".\nRun \"magos help\" for the commands.\n"},
 		{[]string{"serve", "extra"}, 2, "", "\"magos serve\" takes no arguments.\nRun \"magos serve\".\n"},
-		{[]string{"help"}, 0, usage, ""},
+		{[]string{"help"}, 0, wantUsage, ""},
+		{[]string{"-h"}, 0, wantUsage, ""},
+		{[]string{"--help"}, 0, wantUsage, ""},
 	} {
 		var stdout, stderr strings.Builder
 		got := run(tc.args, &stdout, &stderr)

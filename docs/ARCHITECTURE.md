@@ -51,8 +51,9 @@ The data layer comes with SQLite (#8).
 ## Cross-cutting concerns
 
 - **Command output.** Each command of `magos` gives the result first,
-  and the next step on its own line. A command that uses colour shows
-  it only on a terminal, and never when `NO_COLOR` is set.
+  and the next step on its own line. With no command, `magos` prints
+  its usage. A command that uses colour shows it only on a terminal,
+  and never when `NO_COLOR` is set.
 
 ## Invariants
 
