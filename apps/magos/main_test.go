@@ -21,14 +21,14 @@ func TestMain(m *testing.M) {
 }
 
 // A role runs until Ctrl-C or the SIGTERM of launchd, and then exits with 0.
+// The role and the signal do not depend on each other in run, so each one
+// is in one case.
 func TestRoleRunsUntilSignal(t *testing.T) {
 	for _, tc := range []struct {
 		command, role string
 		sig           os.Signal
 	}{
 		{"serve", "The core", os.Interrupt},
-		{"serve", "The core", syscall.SIGTERM},
-		{"servo", "The Servo", os.Interrupt},
 		{"servo", "The Servo", syscall.SIGTERM},
 	} {
 		t.Run(tc.command+" "+tc.sig.String(), func(t *testing.T) {

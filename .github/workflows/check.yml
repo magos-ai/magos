@@ -21,9 +21,6 @@ jobs:
         with:
           go-version-file: apps/magos/go.mod
           cache-dependency-path: apps/magos/go.mod
-      - name: Show the Swift toolchain
-        if: runner.os == 'macOS'
-        run: swift --version
       - run: make check
 
   # The required check of the main ruleset. A job that is skipped after a
