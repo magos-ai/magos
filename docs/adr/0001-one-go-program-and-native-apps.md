@@ -37,15 +37,15 @@ We will build Magos as one Go program and native apps.
   SQLite. `magos servo` is a Servo. It runs the harness sessions and
   works with files. In M1, the core and the Servo run as two processes
   with separate data folders.
-- **Native apps.** The Mac app is SwiftUI. It gives the macOS
-  capabilities to the core as MCP tools, so the harness adapters are
-  written once, in Go. Its bundle id is `dev.kalinichenko.magos`: it
-  comes from a domain of the owner, and it names no company.
+- **Native apps** (PDR 0015). The Mac app is SwiftUI. It gives the
+  macOS capabilities to the core as MCP tools, so the harness adapters
+  are written once, in Go. Its bundle id is `dev.kalinichenko.magos`:
+  it comes from a domain of the owner, and it names no company.
 - **The harnesses, driven directly.** Claude Code runs through
   `claude -p` with stream-json, and Codex through `codex app-server`,
   both in M1. Each Servo starts the unmodified CLI of a harness under
   the login of the person who owns that computer. Magos never holds the
-  login of a harness.
+  login of a harness (PDR 0004).
 - **One control protocol.** The core, the Servo and the app talk
   through a small versioned control protocol: a local socket first,
   then pairing and HTTPS for a remote core in M3. Events are numbered
@@ -66,7 +66,8 @@ We will build Magos as one Go program and native apps.
   when the app goes to other people (#33). After that, Magos ships as
   one download: one DMG with the app and its helper, updates that reach
   the app by themselves, and a first start with no setup, which starts
-  the core, finds the harnesses and offers the first workspace (#43).
+  the core, finds the harnesses and offers the first workspace (PDR
+  0022, #43).
 - **Recorded sessions for the tests.** The tests of the harness
   adapters run on sessions recorded on this repository with short
   neutral tasks. A script replaces the home path and the account ids

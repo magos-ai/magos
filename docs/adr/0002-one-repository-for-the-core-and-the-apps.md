@@ -44,9 +44,9 @@ We will keep the open core in one repository.
 - A part stays out of this repository only when it is closed or
   private, when it has its own users and releases without Magos, or
   when a tool requires a repository of its own. So the team and cloud
-  add-ons (#29), craft, and a person's own prompts, skills and data
-  stay out.
-- Everything in this repository is under Apache-2.0.
+  add-ons (#29, PDR 0001), craft, and a person's own prompts, skills
+  and data stay out.
+- Everything in this repository is under Apache-2.0 (PDR 0001).
 
 ## Consequences
 

@@ -2,8 +2,8 @@
 
 The product's direction, its constraints, its open questions and the
 index of its decisions. Each decision is a PDR in [`pdr/`](pdr/). The
-decisions of the code are in [`decisions.md`](decisions.md) until
-`ARCHITECTURE.md` and its ADRs exist (#6).
+decisions of the code are in [`ARCHITECTURE.md`](ARCHITECTURE.md) and
+its ADRs in [`adr/`](adr/).
 
 ## What Magos is, and for whom
 

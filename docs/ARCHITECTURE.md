@@ -27,8 +27,8 @@ wait and stop, and the Mac app opens one window.
     `Info.plist` of `Magos.app`.
 - `packages/`: code that two directories of `apps/` or more use, as the
   schema of the control protocol (#9). It comes with its first package.
-- `docs/`: this file, the ADRs in `docs/adr/`, and `decisions.md`, which
-  holds the decisions of the product until `docs/PRODUCT.md` (#2).
+- `docs/`: this file, the ADRs in `docs/adr/`, and `PRODUCT.md`, with
+  the decisions of the product in `docs/pdr/`.
 - `Makefile`: `make check`, the check of each directory in `apps/`, and
   `make app`.
 
