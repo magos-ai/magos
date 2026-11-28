@@ -30,13 +30,12 @@ other tool for them.
 
 `.github/workflows/check.yml` runs `make check` on every pull request
 and on each push to `main`, on Linux (`ubuntu-latest`) and on macOS
-(`xcode-27`). Its job `check`
-is the required check of the `main` ruleset. That job runs always, and
-it fails unless both runs of `make check` succeeded: a job that is
-skipped after a failed job in its `needs` reports success, also as a
-required check. The workflow has no `paths:` filter, because the
-required check of a workflow that does not run stays pending, and then
-the pull request cannot merge.
+(`xcode-27`). Its job `check` is the required check of the `main`
+ruleset. That job runs always, and it fails unless both runs of
+`make check` succeeded: a job that is skipped after a failed job in
+its `needs` reports success, also as a required check. The workflow
+has no `paths:` filter, because the required check of a workflow that
+does not run stays pending, and then the pull request cannot merge.
 
 ## The tracker
 

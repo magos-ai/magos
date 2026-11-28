@@ -69,6 +69,9 @@ func TestRoleRunsUntilSignal(t *testing.T) {
 			case <-time.After(5 * time.Second):
 				t.Fatalf("magos %s still runs 5 s after %v", tc.command, tc.sig)
 			}
+			// The child has exited, so the read ends at once: the deadline
+			// of the first line must not cut it.
+			r.SetReadDeadline(time.Time{})
 			rest, err := io.ReadAll(out)
 			if err != nil || !strings.HasSuffix(string(rest), tc.role+" stopped.\n") {
 				t.Errorf("output after the first line %q (%v), want it to end with %q", rest, err, tc.role+" stopped.\n")
@@ -77,22 +80,24 @@ func TestRoleRunsUntilSignal(t *testing.T) {
 	}
 }
 
-// A call that runs no role exits at once. A wrong call says what is wrong,
-// and then the next step.
+// A call that runs no role exits at once. With no command, magos prints the
+// usage. Any other wrong call says what is wrong, and then the next step.
 func TestCallsWithoutARole(t *testing.T) {
 	for _, tc := range []struct {
-		args   []string
-		want   int
-		stderr string
+		args           []string
+		want           int
+		stdout, stderr string
 	}{
-		{nil, 2, usage},
-		{[]string{"nope"}, 2, "Unknown command \"nope\".\nRun \"magos help\" for the commands.\n"},
-		{[]string{"serve", "extra"}, 2, "Unknown command \"serve extra\".\nRun \"magos help\" for the commands.\n"},
-		{[]string{"help"}, 0, ""},
+		{nil, 2, "", usage},
+		{[]string{"nope"}, 2, "", "Unknown command \"nope\".\nRun \"magos help\" for the commands.\n"},
+		{[]string{"serve", "extra"}, 2, "", "\"magos serve\" takes no arguments.\nRun \"magos serve\".\n"},
+		{[]string{"help"}, 0, usage, ""},
 	} {
-		var stderr strings.Builder
-		if got := run(tc.args, io.Discard, &stderr); got != tc.want || stderr.String() != tc.stderr {
-			t.Errorf("magos %q: exit %d, stderr %q; want %d, %q", tc.args, got, stderr.String(), tc.want, tc.stderr)
+		var stdout, stderr strings.Builder
+		got := run(tc.args, &stdout, &stderr)
+		if got != tc.want || stdout.String() != tc.stdout || stderr.String() != tc.stderr {
+			t.Errorf("magos %q: exit %d, stdout %q, stderr %q; want %d, %q, %q",
+				tc.args, got, stdout.String(), stderr.String(), tc.want, tc.stdout, tc.stderr)
 		}
 	}
 }

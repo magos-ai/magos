@@ -8,7 +8,6 @@ import (
 	"io"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 
 	"github.com/magos-ai/magos/apps/magos/internal/core"
@@ -35,8 +34,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	}
 	var name string
 	var role func(context.Context)
-	// No command takes arguments yet, so the whole call is the command.
-	switch command := strings.Join(args, " "); command {
+	switch args[0] {
 	case "serve":
 		name, role = "The core", core.Run
 	case "servo":
@@ -45,7 +43,11 @@ func run(args []string, stdout, stderr io.Writer) int {
 		fmt.Fprint(stdout, usage)
 		return 0
 	default:
-		fmt.Fprintf(stderr, "Unknown command %q.\nRun \"magos help\" for the commands.\n", command)
+		fmt.Fprintf(stderr, "Unknown command %q.\nRun \"magos help\" for the commands.\n", args[0])
+		return 2
+	}
+	if len(args) > 1 {
+		fmt.Fprintf(stderr, "\"magos %s\" takes no arguments.\nRun \"magos %s\".\n", args[0], args[0])
 		return 2
 	}
 
