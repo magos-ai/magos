@@ -46,9 +46,11 @@ owner runs in a terminal today.
   go deep, with the full log, Terminal and skills as files. The
   closest products are named in #2, and checked again when
   `docs/PRODUCT.md` is written.
-- Before the first code, one real task runs in Hermes and is compared
-  with the craft flow: M1 rests on the claim that no other product
-  runs development this way (#45).
+- M1 stays as planned after a real task ran in Hermes (#45). Hermes
+  did as well as the craft flow in a terminal, in 2 turns of the
+  person and 1 h 16 min, but only because it read craft from the
+  repository. Its Kanban took no part, and nothing in the run chose a
+  harness, a model or a review for each step.
 
 ### The order of the work
 
