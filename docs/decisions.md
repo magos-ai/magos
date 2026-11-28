@@ -46,9 +46,18 @@ owner runs in a terminal today.
   go deep, with the full log, Terminal and skills as files. The
   closest products are named in #2, and checked again when
   `docs/PRODUCT.md` is written.
-- Before the first code, one real task runs in Hermes and is compared
-  with the craft flow: M1 rests on the claim that no other product
-  runs development this way (#45).
+- M1 rests on the claim that no other product runs development this
+  way: an agent that chooses the harness, the model and the review of
+  each step. A real task ran in Hermes, an open-source agent by Nous
+  Research, to check the claim (#45). The claim stands, and M1 stays
+  as planned, as the owner decided on 2026-11-28. Hermes did as well
+  as the craft flow in a terminal: 2 turns of the person and 1 h
+  16 min. But the flow of that run came from craft: the task was in
+  the repository of craft, and Hermes read its rules from the files.
+  Every step ran on one model. Hermes's board of tasks for agents
+  (Kanban) can give a task its own model, but it took no part in the
+  run. The check was one task; a repository without craft would show
+  Hermes's own flow.
 
 ### The order of the work
 
