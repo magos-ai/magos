@@ -28,8 +28,9 @@ other tool for them.
 
 ## CI
 
-`.github/workflows/check.yml` runs `make check` on every pull request,
-on Linux (`ubuntu-latest`) and on macOS (`xcode-27`). Its job `check`
+`.github/workflows/check.yml` runs `make check` on every pull request
+and on each push to `main`, on Linux (`ubuntu-latest`) and on macOS
+(`xcode-27`). Its job `check`
 is the required check of the `main` ruleset. That job runs always, and
 it fails unless both runs of `make check` succeeded: a job that is
 skipped after a failed job in its `needs` reports success, also as a

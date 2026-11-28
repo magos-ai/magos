@@ -1,9 +1,12 @@
 name: check
 
 # No paths filter: the required check of a workflow that does not run stays
-# pending, and the pull request cannot merge.
+# pending, and the pull request cannot merge. The run on main shows a break
+# that two pull requests make together, each green alone.
 on:
   pull_request:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
@@ -21,6 +24,10 @@ jobs:
         with:
           go-version-file: apps/magos/go.mod
           cache-dependency-path: apps/magos/go.mod
+      # The runner images change each week: the log shows which Swift ran.
+      - name: Show the Swift toolchain
+        if: runner.os == 'macOS'
+        run: swift --version
       - run: make check
 
   # The required check of the main ruleset. A job that is skipped after a

@@ -35,12 +35,15 @@ We will build Magos as one Go program and native apps.
 - **One program, two roles.** `magos serve` is the core. It keeps the
   workspaces, the projects, the grants, the threads and the runs in
   SQLite. `magos servo` is a Servo. It runs the harness sessions and
-  works with files. In M1, the core and the Servo run as two processes
-  with separate data folders.
+  works with files. The core and the Servo run as two processes with
+  separate data folders, also in M1, when both run on one Mac.
 - **Native apps** (PDR 0015). The Mac app is SwiftUI. It gives the
   macOS capabilities to the core as MCP tools, so the harness adapters
   are written once, in Go. Its bundle id is `dev.kalinichenko.magos`:
-  it comes from a domain of the owner, and it names no company.
+  it comes from a domain of the owner, and it names no company. It
+  needs macOS 27 or later: M1 runs only on the owner's Mac, and the
+  spike checked only macOS 27. The oldest macOS for other people is
+  decided before the first release for them (#43).
 - **The harnesses, driven directly.** Claude Code runs through
   `claude -p` with stream-json, and Codex through `codex app-server`,
   both in M1. Each Servo starts the unmodified CLI of a harness under
@@ -64,10 +67,7 @@ We will build Magos as one Go program and native apps.
 - **The signature.** M1 is signed with a free Apple Development
   certificate and built from source. Developer ID and notarization come
   when the app goes to other people (#33). After that, Magos ships as
-  one download: one DMG with the app and its helper, updates that reach
-  the app by themselves, and a first start with no setup, which starts
-  the core, finds the harnesses and offers the first workspace (PDR
-  0022, #43).
+  one download (PDR 0022, #43).
 - **Recorded sessions for the tests.** The tests of the harness
   adapters run on sessions recorded on this repository with short
   neutral tasks. A script replaces the home path and the account ids

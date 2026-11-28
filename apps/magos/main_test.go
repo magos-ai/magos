@@ -61,29 +61,38 @@ func TestRoleRunsUntilSignal(t *testing.T) {
 			if err := cmd.Process.Signal(tc.sig); err != nil {
 				t.Fatal(err)
 			}
-			if err := <-done; err != nil {
-				t.Fatalf("after %v: %v, want exit 0", tc.sig, err)
+			select {
+			case err := <-done:
+				if err != nil {
+					t.Fatalf("after %v: %v, want exit 0", tc.sig, err)
+				}
+			case <-time.After(5 * time.Second):
+				t.Fatalf("magos %s still runs 5 s after %v", tc.command, tc.sig)
 			}
-			rest, _ := io.ReadAll(out)
-			if !strings.HasSuffix(string(rest), tc.role+" stopped.\n") {
-				t.Errorf("output after the first line %q, want it to end with %q", rest, tc.role+" stopped.\n")
+			rest, err := io.ReadAll(out)
+			if err != nil || !strings.HasSuffix(string(rest), tc.role+" stopped.\n") {
+				t.Errorf("output after the first line %q (%v), want it to end with %q", rest, err, tc.role+" stopped.\n")
 			}
 		})
 	}
 }
 
-func TestExitCodes(t *testing.T) {
+// A call that runs no role exits at once. A wrong call says what is wrong,
+// and then the next step.
+func TestCallsWithoutARole(t *testing.T) {
 	for _, tc := range []struct {
-		args []string
-		want int
+		args   []string
+		want   int
+		stderr string
 	}{
-		{nil, 2},
-		{[]string{"nope"}, 2},
-		{[]string{"serve", "extra"}, 2},
-		{[]string{"help"}, 0},
+		{nil, 2, usage},
+		{[]string{"nope"}, 2, "Unknown command \"nope\".\nRun \"magos help\" for the commands.\n"},
+		{[]string{"serve", "extra"}, 2, "Unknown command \"serve extra\".\nRun \"magos help\" for the commands.\n"},
+		{[]string{"help"}, 0, ""},
 	} {
-		if got := run(tc.args, io.Discard, io.Discard); got != tc.want {
-			t.Errorf("magos %q: exit %d, want %d", tc.args, got, tc.want)
+		var stderr strings.Builder
+		if got := run(tc.args, io.Discard, &stderr); got != tc.want || stderr.String() != tc.stderr {
+			t.Errorf("magos %q: exit %d, stderr %q; want %d, %q", tc.args, got, stderr.String(), tc.want, tc.stderr)
 		}
 	}
 }

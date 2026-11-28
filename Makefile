@@ -1,5 +1,5 @@
 # make check is the check of the whole repository. CI runs it on every pull
-# request, on Linux and on macOS.
+# request and on each push to main, on Linux and on macOS.
 .PHONY: check check-magos check-mac app
 
 check: check-magos check-mac
