@@ -39,4 +39,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - if: needs.make-check.result != 'success'
-        run: echo "make-check: ${{ needs.make-check.result }}" && exit 1
+        run: |
+          echo "make-check: ${{ needs.make-check.result }}"
+          exit 1
