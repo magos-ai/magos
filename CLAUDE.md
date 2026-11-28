@@ -22,8 +22,9 @@ decision, load `craft:architecture`.
 
 The tools are Go, at the version in `apps/magos/go.mod`, and on macOS
 the Swift toolchain of the Xcode Command Line Tools, Swift 6.4 or
-later. The toolchains bring the format and the lint: there is no other
-tool.
+later. The format and the lint come with the toolchains and with
+macOS: `gofmt`, `go vet`, `swift format` and `plutil`. Install no
+other tool for them.
 
 ## CI
 
