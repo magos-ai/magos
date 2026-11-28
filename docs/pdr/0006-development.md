@@ -45,11 +45,12 @@
 A product does all of it: a plan, the harness and the model of each
 step chosen by an agent, a fallback when a limit runs out, and the
 review on another harness. The list of the closest products is in
-`PRODUCT.md`, *How Magos differs*.
+`PRODUCT.md`, *How Magos differs*. A real task in bb and in Paseo Hub
+checks it before #41 starts (#58).
 
 ## Links
 
-PDR 0002, PDR 0004, #22, #23, #41, #45, #56
+PDR 0002, PDR 0004, #22, #23, #41, #45, #56, #58
 
 ## Checked
 
